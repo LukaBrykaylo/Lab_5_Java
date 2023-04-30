@@ -24,12 +24,4 @@ public class EmailWriter {
         }
         return domains.toString();
     }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-        String str = scanner.nextLine();
-        EmailWriter emailWriter = new EmailWriter();
-        emailWriter.findEmails(str);
-        scanner.close();
-    }
 }
