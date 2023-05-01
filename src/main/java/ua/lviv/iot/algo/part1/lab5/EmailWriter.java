@@ -1,26 +1,20 @@
 package ua.lviv.iot.algo.part1.lab5;
 
-import java.nio.charset.StandardCharsets;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmailWriter {
-    Set<String> domains = new HashSet<>();
-    Pattern pattern = Pattern.compile("\\b[\\w-%]+@[\\w-%]+\\.[A-Za-z]{2,}\\b");
+    public static final String EMAIL_DOMAIN_SEPARATOR = "@";
+    public final Pattern EMAIL_PATTERN = Pattern.compile("[\\w-%]+@[\\w-%]+\\.[A-Za-z]{2,}");
+    private final List<String> domains = new LinkedList<>();
 
-    public String findEmails(String string) {
-        Matcher matcher = pattern.matcher(string);
+    public String findDomainsFromEmail(String text) {
+        Matcher matcher = EMAIL_PATTERN.matcher(text);
         while (matcher.find()) {
             String email = matcher.group();
-            String[] splitStr = email.split("@");
-            domains.add(splitStr[1]);
-        }
-
-        for (String domain : domains) {
-            System.out.println(domain);
+            domains.add(email.split(EMAIL_DOMAIN_SEPARATOR)[1]);
         }
         return domains.toString();
     }
